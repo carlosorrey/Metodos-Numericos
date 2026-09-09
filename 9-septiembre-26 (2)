@@ -4,8 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyNaVm8zLT3QnCyOqxEboFJK",
-      "include_colab_link": true
+      "authorship_tag": "ABX9TyM0BX7ZgpFk4eB1DNiVXASZ"
     },
     "kernelspec": {
       "name": "python3",
@@ -17,42 +16,39 @@
   },
   "cells": [
     {
-      "cell_type": "markdown",
-      "metadata": {
-        "id": "view-in-github",
-        "colab_type": "text"
-      },
-      "source": [
-        "<a href=\"https://colab.research.google.com/github/carlosorrey/Metodos-Numericos/blob/main/9-septiembre-26%20(2)\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
-      ]
-    },
-    {
       "cell_type": "code",
-      "execution_count": 8,
+      "execution_count": 9,
       "metadata": {
         "colab": {
-          "base_uri": "https://localhost:8080/"
+          "base_uri": "https://localhost:8080/",
+          "height": 53
         },
         "id": "LvHZLsj_Nfbb",
-        "outputId": "1fbe0fb6-bdd5-4a70-b1e7-20e4239f54fc"
+        "outputId": "31523d0e-dd17-4806-db72-08434fc9a019"
       },
       "outputs": [
         {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "Epsilon de la máquina: 1.1102230246251565e-16\n"
-          ]
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'print(\"Epsilon de la máquina:\", epsilon)'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 9
         }
       ],
       "source": [
-        "epsilon = 1.0\n",
-        "uno = 1.0\n",
-        "\n",
-        "while epsilon + uno > uno:\n",
-        "    epsilon /= 2\n",
-        "\n",
-        "print(\"Epsilon de la máquina:\", epsilon)"
+        "        \"epsilon = 1.0\\n\",\n",
+        "        \"uno = 1.0\\n\",\n",
+        "        \"\\n\",\n",
+        "        \"while epsilon + uno > uno:\\n\",\n",
+        "        \"    epsilon /= 2\\n\",\n",
+        "        \"\\n\",\n",
+        "        \"print(\\\"Epsilon de la máquina:\\\", epsilon)\""
       ]
     }
   ]
