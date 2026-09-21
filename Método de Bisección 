@@ -1,0 +1,105 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPvTY2LFvgrXS6i+IXxzy8E",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/carlosorrey/Metodos-Numericos/blob/main/M%C3%A9todo%20de%20Bisecci%C3%B3n%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fzd3LhqA8MFN",
+        "outputId": "c2cf137f-cedd-422d-b2c2-70ba3d0d721b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "0.0\n",
+            "# iter\t\ta \t\tf(a) \t\tb \t\tf(b) \t\tm \t\tf(m) \t\t error\n",
+            "0 \t\t4.0000 \t -2.8422 \t 4.5000 \t 0.1373 \t 4.2500 \t -2.2437 \t 100.0000\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Metodo de bisección\n",
+        "\n",
+        "from math import *\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as PLT\n",
+        "\n",
+        "def función1(x):\n",
+        "   return np.tan(x)-x\n",
+        "\n",
+        "f=función1(0)\n",
+        "\n",
+        "print(f)\n",
+        "0.0\n",
+        "\n",
+        "#ingreso de datos de entrada para los diferentes métodos a trabajar\n",
+        "a = 4\n",
+        "b = 4.5\n",
+        "\n",
+        "#guarda valores iniciales\n",
+        "a0 = a\n",
+        "b0 = b\n",
+        "\n",
+        "tol = 0.000001\n",
+        "nmax = 100\n",
+        "error = 100\n",
+        "niter = 0\n",
+        "\n",
+        "#Metodo de bisección\n",
+        "\n",
+        "#evalua primer valor medio\n",
+        "m = a + (b - a)/2\n",
+        "\n",
+        "#Evaluacion de la función en los puntos a, b y m\n",
+        "fa = función1(a)\n",
+        "fb = función1(b)\n",
+        "fm = función1(m)\n",
+        "\n",
+        "print(\"# iter\\t\\ta \\t\\tf(a) \\t\\tb \\t\\tf(b) \\t\\tm \\t\\tf(m) \\t\\t error\")\n",
+        "print(\"{0} \\t\\t{1:6.4f} \\t {2:6.4f} \\t {3:6.4f} \\t {4:6.4f} \\t {5:6.4f} \\t {6:6.4f} \\t {7:6.4f}\".format(niter, a0, fa, b0, fb, m, fm, error))\n",
+        "\n",
+        "# ciclo iterativo\n",
+        "while error > tol and niter < nmax:\n",
+        "    m = a + (b - a) / 2\n",
+        "    if np.sign(fa) == np.sign(fm):\n",
+        "        a = m\n",
+        "        fa = función1(a)\n",
+        "    else:\n",
+        "        b = m\n",
+        "        fb = función1(b)\n",
+        "\n",
+        "    m = a + (b - a)/2"
+      ]
+    }
+  ]
+}
