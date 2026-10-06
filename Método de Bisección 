@@ -1,0 +1,131 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/carlosorrey/Metodos-Numericos/blob/main/M%C3%A9todo%20de%20Bisecci%C3%B3n%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fzd3LhqA8MFN",
+        "outputId": "195c9db5-f0f1-4272-84da-a9c1263a50d0"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "0.0\n",
+            "# iter\t\ta \t\tf(a) \t\tb \t\tf(b) \t\tm \t\tf(m) \t\t error\n",
+            "0 \t\t4.0000 \t -2.8422 \t 4.5000 \t 0.1373 \t 4.2500 \t -2.2437 \t 100.0000\n",
+            "1 \t\t 4.250000 \t -2.243691 \t 4.500000 \t 0.137332 \t 4.375000 \t -1.524388 \t 0.250000\n",
+            "2 \t\t 4.375000 \t -1.524388 \t 4.500000 \t 0.137332 \t 4.437500 \t -0.891762 \t 0.125000\n",
+            "3 \t\t 4.437500 \t -0.891762 \t 4.500000 \t 0.137332 \t 4.468750 \t -0.445853 \t 0.062500\n",
+            "4 \t\t 4.468750 \t -0.445853 \t 4.500000 \t 0.137332 \t 4.484375 \t -0.174948 \t 0.031250\n",
+            "5 \t\t 4.484375 \t -0.174948 \t 4.500000 \t 0.137332 \t 4.492188 \t -0.024531 \t 0.015625\n",
+            "6 \t\t 4.492188 \t -0.024531 \t 4.500000 \t 0.137332 \t 4.496094 \t 0.054892 \t 0.007812\n",
+            "7 \t\t 4.492188 \t -0.024531 \t 4.496094 \t 0.054892 \t 4.494141 \t 0.014814 \t 0.003906\n",
+            "8 \t\t 4.492188 \t -0.024531 \t 4.494141 \t 0.014814 \t 4.493164 \t -0.004949 \t 0.001953\n",
+            "9 \t\t 4.493164 \t -0.004949 \t 4.494141 \t 0.014814 \t 4.493652 \t 0.004910 \t 0.000977\n",
+            "10 \t\t 4.493164 \t -0.004949 \t 4.493652 \t 0.004910 \t 4.493408 \t -0.000025 \t 0.000488\n",
+            "11 \t\t 4.493408 \t -0.000025 \t 4.493652 \t 0.004910 \t 4.493530 \t 0.002441 \t 0.000244\n",
+            "12 \t\t 4.493408 \t -0.000025 \t 4.493530 \t 0.002441 \t 4.493469 \t 0.001207 \t 0.000122\n",
+            "13 \t\t 4.493408 \t -0.000025 \t 4.493469 \t 0.001207 \t 4.493439 \t 0.000591 \t 0.000061\n",
+            "14 \t\t 4.493408 \t -0.000025 \t 4.493439 \t 0.000591 \t 4.493423 \t 0.000283 \t 0.000031\n",
+            "15 \t\t 4.493408 \t -0.000025 \t 4.493423 \t 0.000283 \t 4.493416 \t 0.000129 \t 0.000015\n",
+            "16 \t\t 4.493408 \t -0.000025 \t 4.493416 \t 0.000129 \t 4.493412 \t 0.000052 \t 0.000008\n",
+            "17 \t\t 4.493408 \t -0.000025 \t 4.493412 \t 0.000052 \t 4.493410 \t 0.000013 \t 0.000004\n",
+            "18 \t\t 4.493408 \t -0.000025 \t 4.493410 \t 0.000013 \t 4.493409 \t -0.000006 \t 0.000002\n",
+            "19 \t\t 4.493409 \t -0.000006 \t 4.493410 \t 0.000013 \t 4.493410 \t 0.000004 \t 0.000001\n",
+            "La raíz de la función dada en el intervalo [4.0000,4.5000] es 4.4934096\n"
+          ]
+        }
+      ],
+      "source": [
+        "#Metodo de bisección\n",
+        "\n",
+        "from math import *\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as PLT\n",
+        "\n",
+        "def función1(x):\n",
+        "   return np.tan(x)-x\n",
+        "\n",
+        "f=función1(0)\n",
+        "\n",
+        "print(f)\n",
+        "0.0\n",
+        "\n",
+        "#ingreso de datos de entrada para los diferentes métodos a trabajar\n",
+        "a = 4\n",
+        "b = 4.5\n",
+        "\n",
+        "#guarda valores iniciales\n",
+        "a0 = a\n",
+        "b0 = b\n",
+        "\n",
+        "tol = 0.000001\n",
+        "nmax = 100\n",
+        "error = 100\n",
+        "niter = 0\n",
+        "\n",
+        "#Metodo de bisección\n",
+        "\n",
+        "#evalua primer valor medio\n",
+        "m = a + (b - a)/2\n",
+        "\n",
+        "#Evaluacion de la función en los puntos a, b y m\n",
+        "fa = función1(a)\n",
+        "fb = función1(b)\n",
+        "fm = función1(m)\n",
+        "\n",
+        "print(\"# iter\\t\\ta \\t\\tf(a) \\t\\tb \\t\\tf(b) \\t\\tm \\t\\tf(m) \\t\\t error\")\n",
+        "print(\"{0} \\t\\t{1:6.4f} \\t {2:6.4f} \\t {3:6.4f} \\t {4:6.4f} \\t {5:6.4f} \\t {6:6.4f} \\t {7:6.4f}\".format(niter, a0, fa, b0, fb, m, fm, error))\n",
+        "\n",
+        "# ciclo iterativo\n",
+        "while error > tol and niter < nmax:\n",
+        "    m = a + (b - a) / 2\n",
+        "    if np.sign(fa) == np.sign(fm):\n",
+        "        a = m\n",
+        "        fa = función1(a)\n",
+        "    else:\n",
+        "        b = m\n",
+        "        fb = función1(b)\n",
+        "\n",
+        "    m = a + (b - a)/2\n",
+        "    fm = función1(m)\n",
+        "    error = abs(b - a)\n",
+        "    niter += 1\n",
+        "    print(\"{0} \\t\\t {1:6.6f} \\t {2:6.6f} \\t {3:6.6f} \\t {4:6.6f} \\t {5:6.6f} \\t {6:6.6f} \\t {7:6.6f}\".format(niter, a, fa, b, fb, m, fm, error ))\n",
+        "\n",
+        "print(\"La raíz de la función dada en el intervalo [{0:6.4f},{1:6.4f}] es {2:6.7f}\".format(a0,b0,m))"
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP8kx5w0ja2U+pldkmShwGQ",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
