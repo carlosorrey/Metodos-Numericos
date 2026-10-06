@@ -1,0 +1,82 @@
+# ==============================================================================
+# MÉTODO DE BISECCIÓN
+# ==============================================================================
+# Problema: Encontrar una raíz de f(x) = x^3 + 4x^2 - 10 en [1, 2]
+# Comprobación de cambio de signo: f(1) = -5  y  f(2) = 14  (f(1)*f(2) < 0)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definimos la función a evaluar
+def f(x):
+    return x**3 + 4*x**2 - 10
+
+# Algoritmo principal de bisección
+def biseccion(a0, b0, tol, nmax):
+    a, b = a0, b0
+    fa = f(a)
+    datos = []
+    
+    for i in range(1, nmax + 1):
+        p = a + (b - a) / 2.0
+        fp = f(p)
+        fb = f(b)
+        
+        # Guardamos la iteración actual para la tabla
+        datos.append([i, a, fa, b, fb, p, fp])
+        
+        # Si la función en el punto medio es exactamente 0, encontramos la raíz
+        if fp == 0:
+            return p, datos
+        
+        # Conservamos el subintervalo que mantiene el cambio de signo
+        if fa * fp > 0:
+            a, fa = p, fp
+        else:
+            b = p
+            
+        # Criterio de parada por error relativo
+        error_rel = abs(b - a) / min(abs(a), abs(b))
+        if error_rel < tol:
+            return p, datos
+            
+    return p, datos
+
+# ------------------------------------------------------------------------------
+# Ejecución del método
+# ------------------------------------------------------------------------------
+a0, b0 = 1, 2
+tol = 1e-4
+nmax = 100
+
+raiz, datos = biseccion(a0, b0, tol, nmax)
+
+# Impresión de la tabla de iteraciones
+print("# iter\t\t  a\t\t f(a)\t\t  b\t\t f(b)\t\t  p\t\t f(p)")
+print("-" * 105)
+for fila in datos:
+    print("{0}\t\t{1:9.6f}\t{2:9.6f}\t{3:9.6f}\t{4:9.6f}\t{5:9.6f}\t{6:9.6f}".format(*fila))
+
+# ------------------------------------------------------------------------------
+# Gráfica de convergencia
+# ------------------------------------------------------------------------------
+iteraciones = [fila[0] for fila in datos]
+puntos = [fila[5] for fila in datos]
+
+plt.figure(figsize=(8, 4))
+plt.plot(iteraciones, puntos, 'o-', color='navy', label='Punto medio (p)')
+plt.axhline(raiz, color='crimson', linestyle='--', label=f'Raíz ≈ {raiz:.5f}')
+plt.xlabel('Iteración')
+plt.ylabel('Aproximación p')
+plt.title('Convergencia del Método de Bisección')
+plt.grid(True, linestyle=':', alpha=0.7)
+plt.legend()
+plt.show()
+
+# ------------------------------------------------------------------------------
+# Comprobación del resultado
+# ------------------------------------------------------------------------------
+print("\n" + "="*45)
+print(f"RESULTADO FINAL: p13 = {raiz:.10f}")
+print(f"RESIDUO EVALUADO: f(p13) = {f(raiz):.6e}")
+print("="*45)
